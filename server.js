@@ -294,6 +294,29 @@ app.get('/', async (req, res) => {
   const html = getPageHtml({ lang, docNo, searched, resultData });
   res.send(html);
 });
+// مسار لإضافة كود جديد مع رابط المستند
+app.post('/add-code', async (req, res) => {
+  const { code, document_url, secret_key } = req.body;
+
+  // حماية بسيطة لمنع أي شخص غير مجاز من إضافة أكواد
+  if (secret_key !== 'MY_SECRET_KEY_123') {
+    return res.status(403).json({ error: 'غير مصرح لك بالإضافة' });
+  }
+
+  if (!code || !document_url) {
+    return res.status(400).json({ error: 'يرجى إرسال الكود ورابط المستند' });
+  }
+
+  const { data, error } = await supabase
+    .from('product_codes')
+    .insert([{ code: code.trim(), document_url: document_url.trim() }]);
+
+  if (error) {
+    return res.status(500).json({ error: error.message });
+  }
+
+  res.json({ message: 'تمت إضافة الكود بنجاح!', data });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

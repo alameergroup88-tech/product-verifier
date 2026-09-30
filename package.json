@@ -1,12 +1,23 @@
 {
-  "name": "your-project-name",
+  "name": "product-verifier",
   "version": "1.0.0",
+  "description": "Document verification system for Final International University",
+  "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node --watch server.js"
   },
+  "keywords": [
+    "verifier",
+    "express",
+    "supabase",
+    "document-verification"
+  ],
+  "author": "alameergroup88-tech",
+  "license": "ISC",
   "dependencies": {
-    "@supabase/supabase-js": "^2.0.0",
-    "express": "^4.18.2"
+    "@supabase/supabase-js": "^2.48.0",
+    "express": "^4.21.2"
   }
 }

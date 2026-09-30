@@ -16,10 +16,10 @@ if (!supabaseUrl || !supabaseKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
-// رابط الشعار المباشر من مستودع GitHub الخاص بك
-const LOGO_URL = "https://raw.githubusercontent.com/alameergroup88-tech/product-verifier/main/logo.png";
+// رابط الشعار المباشر المعدل (Raw URL)
+const LOGO_URL = "https://raw.githubusercontent.com/alameergroup88-tech/product-verifier/ca65e83822a84a2375be5b0b5e3fd76417f71dbd/IMG_20261001_012246.png";
 
-// رابط الصورة التوضيحية المباشر كاملاً من GitHub
+// رابط صورة التوضيح المباشر من GitHub (Raw URL)
 const EXAMPLE_IMG_URL = "https://raw.githubusercontent.com/alameergroup88-tech/product-verifier/main/verfy-en.png";
 
 function getPageHtml({ lang, docNo, searched, resultData }) {
@@ -135,7 +135,7 @@ function getPageHtml({ lang, docNo, searched, resultData }) {
       line-height: 1.6;
       margin-bottom: 20px;
     }
-    /* الصورة التوضيحية كاملة ومناسبة لجميع الشاشات */
+    /* صورة التوضيح كاملة وبشكل واضح */
     .example-img {
       display: block;
       max-width: 100%;
@@ -202,7 +202,7 @@ function getPageHtml({ lang, docNo, searched, resultData }) {
 </head>
 <body>
   <div class="card">
-    <!-- الشعار العلوي المباشر -->
+    <!-- الشعار العلوي -->
     <img src="${LOGO_URL}" alt="Final International University" class="logo">
 
     <!-- أزرار اختيار اللغة -->
@@ -218,14 +218,14 @@ function getPageHtml({ lang, docNo, searched, resultData }) {
       </div>
 
       ${resultData ? `
-        <!-- صندوق أخضر شفاف عند صحة الكود -->
+        <!-- صندوق أخضر عند صحة الكود -->
         <div class="status-box status-success">
           ✓ Document verified
         </div>
         <div class="preview-title">preview</div>
         <iframe src="${resultData.pdf_url}" class="preview-frame"></iframe>
       ` : `
-        <!-- صندوق أحمر شفاف عند خطأ الكود -->
+        <!-- صندوق أحمر عند خطأ الكود -->
         <div class="status-box status-error">
           X The verification code cannot be find
         </div>
@@ -251,7 +251,7 @@ function getPageHtml({ lang, docNo, searched, resultData }) {
                : 'The document number is located in the lower right corner of the document. Example:'}
       </div>
 
-      <!-- الصورة التوضيحية كاملة -->
+      <!-- صورة التوضيح كاملة -->
       <img src="${EXAMPLE_IMG_URL}" alt="Document Verification Example" class="example-img">
 
       <hr style="border:0; border-top:1px solid #eee; margin:25px 0;">

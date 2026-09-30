@@ -28,14 +28,16 @@ app.get('/', async (req, res) => {
 
   if (docNo) {
     searched = true;
-    // الاستعلام المطابق لجدولك في Supabase (product_codes)
+    const cleanDocNo = docNo.trim(); // تنظيف إدخال الكود وإزالة المسافات المخفية
+
+    // الاستعلام المطابق لجدول product_codes في Supabase
     const { data, error } = await supabase
       .from('product_codes')
       .select('*')
-      .ilike('code', docNo)
+      .ilike('code', cleanDocNo)
       .maybeSingle();
 
-    if (data && !error) {
+    if (data && !error && data.document_url) {
       resultData = {
         pdf_url: data.document_url
       };
@@ -79,7 +81,6 @@ app.get('/', async (req, res) => {
       padding: 28px 18px 40px;
     }
 
-    /* خلفية متدرجة بأشكال هندسية */
     body::before, body::after {
       content: "";
       position: fixed;
@@ -111,7 +112,6 @@ app.get('/', async (req, res) => {
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
-    /* شعار الجامعة العلوي */
     .logo {
       display: block;
       width: min(100%, 575px);
@@ -121,7 +121,6 @@ app.get('/', async (req, res) => {
       margin: 0 auto 22px;
     }
 
-    /* أزرار اختيار اللغة */
     .language-switch {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -199,7 +198,6 @@ app.get('/', async (req, res) => {
       margin: 20px auto;
     }
 
-    /* واجهة عرض نتيجة التحقق */
     .doc-number-title {
       font-size: 24px;
       font-weight: bold;

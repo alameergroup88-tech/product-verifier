@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Document Verification | Final International University</title>
 
   <style>
@@ -14,25 +13,19 @@
     :root {
       --red: #df3044;
       --red-dark: #cf2639;
-
       --text: #333;
       --card: rgba(255, 255, 255, 0.97);
 
-      --green-bg: rgba(82, 190, 108, 0.22);
-      --green-border: rgba(82, 190, 108, 0.22);
-      --green-text: #216b35;
+      --green-bg: #d1e7dd;
+      --green-text: #0f5132;
 
-      --error-bg: rgba(239, 68, 68, 0.16);
-      --error-border: rgba(220, 38, 38, 0.20);
-      --error-text: #a51d2d;
+      --error-bg: #f8d7da;
+      --error-text: #842029;
 
-      /* زر Check Another Document */
-      --button-green: #157347;
-      --button-green-dark: #0f5c38;
+      --btn-green: #17a2b8;
     }
 
-    html,
-    body {
+    html, body {
       margin: 0;
       min-height: 100%;
     }
@@ -42,11 +35,10 @@
       color: var(--text);
       background: #f7f7f7;
       overflow-x: hidden;
+      padding: 28px 18px 40px;
     }
 
-    /* خلفية قريبة من الموقع الموجود في الصورة */
-    body::before,
-    body::after {
+    body::before, body::after {
       content: "";
       position: fixed;
       inset: 0;
@@ -57,117 +49,242 @@
 
     body::before {
       background:
-        linear-gradient(
-          60deg,
-          transparent 49%,
-          #ededed 50%,
-          transparent 51%
-        ) 0 0 / 310px 310px,
-
-        linear-gradient(
-          -60deg,
-          transparent 49%,
-          #ededed 50%,
-          transparent 51%
-        ) 0 0 / 310px 310px;
+        linear-gradient(60deg, transparent 49%, #ededed 50%, transparent 51%) 0 0 / 310px 310px,
+        linear-gradient(-60deg, transparent 49%, #ededed 50%, transparent 51%) 0 0 / 310px 310px;
     }
 
     body::after {
       background:
-        linear-gradient(
-          120deg,
-          transparent 49%,
-          #f0f0f0 50%,
-          transparent 51%
-        ) 155px 155px / 310px 310px,
-
-        linear-gradient(
-          -120deg,
-          transparent 49%,
-          #f0f0f0 50%,
-          transparent 51%
-        ) 155px 155px / 310px 310px;
-    }
-
-    .page {
-      width: 100%;
-      padding: 28px 18px 40px;
+        linear-gradient(120deg, transparent 49%, #f0f0f0 50%, transparent 51%) 155px 155px / 310px 310px,
+        linear-gradient(-120deg, transparent 49%, #f0f0f0 50%, transparent 51%) 155px 155px / 310px 310px;
     }
 
     .card {
       width: min(675px, 100%);
       margin: 0 auto;
-
       background: var(--card);
-
       border: 1px solid #d7d7d7;
       border-radius: 7px;
-
       padding: 38px 42px 38px;
-
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
-    /* =========================
-       LOGO
-    ========================== */
-
     .logo {
       display: block;
-
       width: min(100%, 575px);
       max-height: 150px;
-
       object-fit: contain;
       object-position: center;
-
       margin: 0 auto 22px;
     }
 
-    /* =========================
-       LANGUAGE BUTTONS
-    ========================== */
-
     .language-switch {
       display: grid;
-
       grid-template-columns: 1fr 1fr;
-
       width: 100%;
-
-      margin: 0 0 70px;
-
+      margin: 0 0 35px;
       border-radius: 8px;
       overflow: hidden;
-
       box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e0e0e0;
     }
 
-    .language-switch button {
-      border: 0;
-
-      min-height: 88px;
-
+    .language-switch a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 70px;
       padding: 15px;
-
       background: #ffffff;
       color: #333333;
-
-      font-size: 25px;
+      font-size: 22px;
       font-weight: 700;
-
-      cursor: pointer;
-
+      text-decoration: none;
       transition: 0.2s ease;
     }
 
-    .language-switch button.active {
+    .language-switch a.active {
       background: var(--red);
       color: #ffffff;
     }
 
-    .language-switch button:hover {
-      filter: brightness(0.98);
+    .form-group {
+      margin-bottom: 20px;
     }
 
-    /* =========================
+    label {
+      font-weight: bold;
+      font-size: 20px;
+      font-style: italic;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 18px;
+    }
+
+    .btn-red {
+      background: var(--red);
+      color: #fff;
+      border: none;
+      padding: 12px 30px;
+      font-size: 20px;
+      font-style: italic;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 30px;
+    }
+
+    .info-text {
+      text-align: center;
+      font-style: italic;
+      color: #555;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .example-img {
+      display: block;
+      max-width: 100%;
+      margin: 20px auto;
+    }
+
+    .doc-number-title {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .highlight-red {
+      color: var(--red);
+    }
+
+    .status-box {
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .status-success {
+      background-color: var(--green-bg);
+      color: var(--green-text);
+    }
+
+    .status-error {
+      background-color: var(--error-bg);
+      color: var(--error-text);
+    }
+
+    .preview-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .preview-frame {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #ccc;
+      margin-bottom: 30px;
+      background: #eee;
+    }
+
+    .btn-check-another {
+      display: block;
+      width: 220px;
+      margin: 30px auto 0;
+      background: var(--btn-green);
+      color: #fff;
+      text-align: center;
+      padding: 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 1.3;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <!-- الشعار الرسمي السليم -->
+    <img src="https://docs.final.edu.tr/assets/img/logo.png" alt="Final International University Logo" class="logo">
+
+    <!-- أزرار اللغة -->
+    <div class="language-switch">
+      <a href="/?lang=en{{#if docNo}}&docNo={{docNo}}{{/if}}" class="{{#if isEn}}active{{/if}}">English</a>
+      <a href="/?lang=tr{{#if docNo}}&docNo={{docNo}}{{/if}}" class="{{#if isTr}}active{{/if}}">Türkçe</a>
+    </div>
+
+    {{#if searched}}
+      <!-- حالة النتيجة بعد البحث -->
+      <div class="doc-number-title">
+        Document No: <span class="highlight-red">{{docNo}}</span>
+      </div>
+
+      {{#if resultData}}
+        <div class="status-box status-success">
+          ✔ Document verified
+        </div>
+        <div class="preview-title">Preview</div>
+        <iframe src="{{resultData.pdf_url}}" class="preview-frame"></iframe>
+      {{else}}
+        <div class="status-box status-error">
+          ✖ The verification code cannot be found
+        </div>
+      {{/if}}
+
+      <a href="/?lang={{lang}}" class="btn-check-another">
+        Check<br>another<br>document
+      </a>
+
+    {{else}}
+      <!-- نموذج البحث قبل الإدخال -->
+      <form action="/" method="GET">
+        <input type="hidden" name="lang" value="{{lang}}">
+        <div class="form-group">
+          <label>{{#if isTr}}Belge No{{else}}Document No{{/if}}</label>
+          <input type="text" name="docNo" required autocomplete="off">
+        </div>
+        <button type="submit" class="btn-red">{{#if isTr}}Doğrula{{else}}Verify{{/if}}</button>
+      </form>
+
+      <div class="info-text">
+        {{#if isTr}}
+          Belge numarası belgenin sağ alt köşesinde yer almaktadır. Örnek:
+        {{else}}
+          The document number is located in the lower right corner of the document. Example:
+        {{/if}}
+      </div>
+
+      <img src="https://raw.githubusercontent.com/alameergroup88-tech/product-verifier/main/verfy-en.png" alt="Verification Example" class="example-img">
+
+      <hr style="border: 0; border-top: 1px solid #eee; margin: 25px 0;">
+
+      <div class="info-text">
+        {{#if isTr}}
+          QR kodu olmayan diplomaları sorgulamak için lütfen öğrenci numarası ile diploma numarasını arada boşluk bırakmadan giriniz. Örnek: 13030100002013-100.
+        {{else}}
+          To inquire about diplomas without a QR code, please enter the student number and diploma number without any spaces in between. For example: 13030100002013-100.
+        {{/if}}
+      </div>
+    {{/if}}
+  </div>
+
+</body>
+</html>

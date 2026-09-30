@@ -16,10 +16,10 @@ if (!supabaseUrl || !supabaseKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
-// رابط الشعار المباشر من الشعار الرسمي للجامعة
-const LOGO_URL = "https://docs.final.edu.tr/assets/img/logo.png";
+// رابط الشعار المباشر من مستودع GitHub الخاص بك
+const LOGO_URL = "https://raw.githubusercontent.com/alameergroup88-tech/product-verifier/main/logo.png";
 
-// رابط صورة التوضيح المباشر من GitHub
+// رابط الصورة التوضيحية المباشر كاملاً من GitHub
 const EXAMPLE_IMG_URL = "https://raw.githubusercontent.com/alameergroup88-tech/product-verifier/main/verfy-en.png";
 
 function getPageHtml({ lang, docNo, searched, resultData }) {
@@ -135,22 +135,13 @@ function getPageHtml({ lang, docNo, searched, resultData }) {
       line-height: 1.6;
       margin-bottom: 20px;
     }
-    /* إخفاء الجزء الجانبي من الصورة باستخدام Crop */
-    .img-container {
-      width: 100%;
-      max-width: 380px;
-      height: 220px;
-      overflow: hidden;
-      margin: 20px auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    /* الصورة التوضيحية كاملة ومناسبة لجميع الشاشات */
     .example-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: left center;
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 20px auto;
+      border-radius: 4px;
     }
     .doc-number-title {
       font-size: 24px;
@@ -211,7 +202,7 @@ function getPageHtml({ lang, docNo, searched, resultData }) {
 </head>
 <body>
   <div class="card">
-    <!-- الشعار العلوي -->
+    <!-- الشعار العلوي المباشر -->
     <img src="${LOGO_URL}" alt="Final International University" class="logo">
 
     <!-- أزرار اختيار اللغة -->
@@ -227,14 +218,14 @@ function getPageHtml({ lang, docNo, searched, resultData }) {
       </div>
 
       ${resultData ? `
-        <!-- صندوق أخضر عند صحة الكود -->
+        <!-- صندوق أخضر شفاف عند صحة الكود -->
         <div class="status-box status-success">
           ✓ Document verified
         </div>
         <div class="preview-title">preview</div>
         <iframe src="${resultData.pdf_url}" class="preview-frame"></iframe>
       ` : `
-        <!-- صندوق أحمر عند خطأ الكود -->
+        <!-- صندوق أحمر شفاف عند خطأ الكود -->
         <div class="status-box status-error">
           X The verification code cannot be find
         </div>
@@ -260,10 +251,8 @@ function getPageHtml({ lang, docNo, searched, resultData }) {
                : 'The document number is located in the lower right corner of the document. Example:'}
       </div>
 
-      <!-- صورة التوضيح -->
-      <div class="img-container">
-        <img src="${EXAMPLE_IMG_URL}" alt="Document Verification Example" class="example-img">
-      </div>
+      <!-- الصورة التوضيحية كاملة -->
+      <img src="${EXAMPLE_IMG_URL}" alt="Document Verification Example" class="example-img">
 
       <hr style="border:0; border-top:1px solid #eee; margin:25px 0;">
 

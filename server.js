@@ -16,7 +16,12 @@ if (!supabaseUrl || !supabaseKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
-// دالة توليد واجهة HTML كاملة دون الحاجة لملفات خارجية
+// رابط الشعار المباشر من الشعار الرسمي للجامعة
+const LOGO_URL = "https://docs.final.edu.tr/assets/img/logo.png";
+
+// رابط صورة التوضيح المباشر من GitHub
+const EXAMPLE_IMG_URL = "https://raw.githubusercontent.com/alameergroup88-tech/product-verifier/main/verfy-en.png";
+
 function getPageHtml({ lang, docNo, searched, resultData }) {
   const isEn = lang !== 'tr';
   const isTr = lang === 'tr';
@@ -59,6 +64,7 @@ function getPageHtml({ lang, docNo, searched, resultData }) {
       padding: 38px 42px 38px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
+    /* الشعار العلوي */
     .logo {
       display: block;
       width: min(100%, 450px);
@@ -66,6 +72,7 @@ function getPageHtml({ lang, docNo, searched, resultData }) {
       object-fit: contain;
       margin: 0 auto 25px;
     }
+    /* صندوق اختيار اللغة */
     .language-switch {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -87,6 +94,7 @@ function getPageHtml({ lang, docNo, searched, resultData }) {
       font-size: 22px;
       font-weight: 700;
       text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease;
     }
     .language-switch a.active {
       background: var(--red);
@@ -127,16 +135,29 @@ function getPageHtml({ lang, docNo, searched, resultData }) {
       line-height: 1.6;
       margin-bottom: 20px;
     }
-    .example-img {
-      display: block;
-      max-width: 100%;
+    /* إخفاء الجزء الجانبي من الصورة باستخدام Crop */
+    .img-container {
+      width: 100%;
+      max-width: 380px;
+      height: 220px;
+      overflow: hidden;
       margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .example-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left center;
     }
     .doc-number-title {
       font-size: 24px;
       font-weight: bold;
       text-align: center;
       margin-bottom: 25px;
+      color: #333;
     }
     .highlight-red { color: var(--red); }
     .status-box {
@@ -184,40 +205,47 @@ function getPageHtml({ lang, docNo, searched, resultData }) {
       font-weight: bold;
       font-size: 16px;
       line-height: 1.3;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <img src="https://raw.githubusercontent.com/alameergroup88-tech/product-verifier/main/logo.png" 
-         alt="Logo" class="logo" onerror="this.src='https://docs.final.edu.tr/assets/img/logo.png'">
+    <!-- الشعار العلوي -->
+    <img src="${LOGO_URL}" alt="Final International University" class="logo">
 
+    <!-- أزرار اختيار اللغة -->
     <div class="language-switch">
       <a href="/?lang=en${docNo ? '&docNo=' + encodeURIComponent(docNo) : ''}" class="${isEn ? 'active' : ''}">English</a>
       <a href="/?lang=tr${docNo ? '&docNo=' + encodeURIComponent(docNo) : ''}" class="${isTr ? 'active' : ''}">Türkçe</a>
     </div>
 
     ${searched ? `
+      <!-- الشاشة الثانية: بعد كتابة الكود -->
       <div class="doc-number-title">
         Document No: <span class="highlight-red">${docNo}</span>
       </div>
 
       ${resultData ? `
+        <!-- صندوق أخضر عند صحة الكود -->
         <div class="status-box status-success">
           ✓ Document verified
         </div>
         <div class="preview-title">preview</div>
         <iframe src="${resultData.pdf_url}" class="preview-frame"></iframe>
       ` : `
+        <!-- صندوق أحمر عند خطأ الكود -->
         <div class="status-box status-error">
           X The verification code cannot be find
         </div>
       `}
 
+      <!-- زر إعادة البحث الأخضر -->
       <a href="/?lang=${lang}" class="btn-check-another">
         Check<br>Anther<br>Document
       </a>
     ` : `
+      <!-- الشاشة الأولى: نموذج البحث -->
       <form action="/" method="GET">
         <input type="hidden" name="lang" value="${lang}">
         <div class="form-group">
@@ -232,8 +260,10 @@ function getPageHtml({ lang, docNo, searched, resultData }) {
                : 'The document number is located in the lower right corner of the document. Example:'}
       </div>
 
-      <img src="https://raw.githubusercontent.com/alameergroup88-tech/product-verifier/blob/main/verfy-en.png?raw=true" 
-           alt="Example" class="example-img">
+      <!-- صورة التوضيح -->
+      <div class="img-container">
+        <img src="${EXAMPLE_IMG_URL}" alt="Document Verification Example" class="example-img">
+      </div>
 
       <hr style="border:0; border-top:1px solid #eee; margin:25px 0;">
 
